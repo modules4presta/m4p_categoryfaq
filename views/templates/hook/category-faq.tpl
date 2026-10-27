@@ -1,5 +1,5 @@
 {**
- * m4pcategoryfaq
+ * m4p_categoryfaq
  *
  * @author    Modules4Presta <contact@modules4presta.io>
  * @copyright 2026 Nice Code sp. z o.o. (Modules4Presta)

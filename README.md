@@ -26,7 +26,7 @@ Questions are managed on their own back-office screen, written per language, ass
 - **Per-language content** – question and answer are translated like any other PrestaShop content.
 - **Position and an on/off switch** – lower positions come first; a question can be prepared and shown later.
 - **FAQPage structured data** – emitted once per question set, on the first unfiltered page of the category.
-- **Page cache purge** – saving a question purges the LiteSpeed cache of the affected categories.
+- **Template cache cleared on save** – a changed question is visible on the category page at once.
 
 ### Paginated, filtered and sorted listings
 

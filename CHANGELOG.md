@@ -14,6 +14,6 @@ First open-source release, published under the MIT license.
   position and switched on individually, managed from **Catalog → Category FAQ**.
 - `displayM4pCategoryFaq` hook rendering the questions below the product list.
 - FAQPage structured data, emitted once per question set on the first unfiltered page of a category.
-- LiteSpeed page cache purge of the affected categories when a question is saved.
+- The template cache is cleared when a question is saved, so the change is visible at once.
 - en-US and pl-PL catalogues, MIT headers, `LICENSE`, `README`, `SECURITY`, `CONTRIBUTING`,
   `composer.json`, `config.xml` and `index.php` guards in every directory.

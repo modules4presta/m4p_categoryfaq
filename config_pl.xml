@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-    <name>m4pcategoryfaq</name>
+    <name>m4p_categoryfaq</name>
     <displayName><![CDATA[FAQ kategorii]]></displayName>
     <version><![CDATA[1.0.0]]></version>
     <description><![CDATA[Pytania i odpowiedzi pod listą produkt&oacute;w kategorii, z danymi strukturalnymi FAQPage.]]></description>

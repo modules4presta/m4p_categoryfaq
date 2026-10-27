@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * m4pcategoryfaq
+ * m4p_categoryfaq
  *
  * @author    Modules4Presta <contact@modules4presta.io>
  * @copyright 2026 Nice Code sp. z o.o. (Modules4Presta)
@@ -16,15 +16,15 @@ if (!defined('_PS_VERSION_')) {
 
 class AdminM4pCategoryFaqController extends ModuleAdminController
 {
-    /** @var M4pcategoryfaq */
+    /** @var M4p_CategoryFaq */
     public $module;
 
     public function __construct()
     {
         $this->bootstrap = true;
-        $this->table = 'm4pcategoryfaq_item';
+        $this->table = 'm4p_categoryfaq_item';
         $this->className = 'M4pCategoryFaqItem';
-        $this->identifier = 'id_m4pcategoryfaq_item';
+        $this->identifier = 'id_m4p_categoryfaq_item';
         $this->lang = true;
         $this->_defaultOrderBy = 'position';
         $this->_defaultOrderWay = 'ASC';
@@ -33,16 +33,16 @@ class AdminM4pCategoryFaqController extends ModuleAdminController
 
         $this->_select = 'GROUP_CONCAT(DISTINCT cl.`name` ORDER BY cl.`name` SEPARATOR ", ") AS categories';
         $this->_join = '
-            LEFT JOIN `' . _DB_PREFIX_ . 'm4pcategoryfaq_item_category` ic
-                ON ic.`id_m4pcategoryfaq_item` = a.`id_m4pcategoryfaq_item`
+            LEFT JOIN `' . _DB_PREFIX_ . 'm4p_categoryfaq_item_category` ic
+                ON ic.`id_m4p_categoryfaq_item` = a.`id_m4p_categoryfaq_item`
             LEFT JOIN `' . _DB_PREFIX_ . 'category_lang` cl
                 ON cl.`id_category` = ic.`id_category`
                 AND cl.`id_lang` = ' . (int) $this->context->language->id . '
                 AND cl.`id_shop` = ' . (int) $this->context->shop->id;
-        $this->_group = 'GROUP BY a.`id_m4pcategoryfaq_item`';
+        $this->_group = 'GROUP BY a.`id_m4p_categoryfaq_item`';
 
         $this->fields_list = [
-            'id_m4pcategoryfaq_item' => [
+            'id_m4p_categoryfaq_item' => [
                 'title' => $this->trans('ID', [], 'Admin.Global'),
                 'align' => 'center',
                 'class' => 'fixed-width-xs',
@@ -121,7 +121,7 @@ class AdminM4pCategoryFaqController extends ModuleAdminController
                     'required' => true,
                     'desc' => $this->trans('The question shows below the product list of each selected category.', [], 'Modules.M4pcategoryfaq.Admin'),
                     'tree' => [
-                        'id' => 'm4pcategoryfaq-categories',
+                        'id' => 'm4p_categoryfaq-categories',
                         'use_search' => true,
                         'use_checkbox' => true,
                         'selected_categories' => $selected,
@@ -167,21 +167,14 @@ class AdminM4pCategoryFaqController extends ModuleAdminController
             return parent::postProcess();
         }
 
-        // Categories the item leaves (edit, delete) need their cached pages purged as well.
-        $touched = M4pCategoryFaqItem::getCategoriesOfItems(array_merge(
-            [(int) Tools::getValue($this->identifier)],
-            (array) Tools::getValue($this->table . 'Box', [])
-        ));
-
         $result = parent::postProcess();
 
         if ('save' === $this->action && !$this->errors && Validate::isLoadedObject($this->object)) {
             $this->object->setCategories((array) Tools::getValue('categoryBox', []));
-            $touched = array_merge($touched, $this->object->getCategories());
         }
 
         if (!$this->errors) {
-            $this->module->purgeCategoryPages($touched);
+            Tools::clearSmartyCache();
         }
 
         return $result;

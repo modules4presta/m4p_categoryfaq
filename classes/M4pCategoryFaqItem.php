@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * m4pcategoryfaq
+ * m4p_categoryfaq
  *
  * @author    Modules4Presta <contact@modules4presta.io>
  * @copyright 2026 Nice Code sp. z o.o. (Modules4Presta)
@@ -35,8 +35,8 @@ class M4pCategoryFaqItem extends ObjectModel
     public $date_upd;
 
     public static $definition = [
-        'table' => 'm4pcategoryfaq_item',
-        'primary' => 'id_m4pcategoryfaq_item',
+        'table' => 'm4p_categoryfaq_item',
+        'primary' => 'id_m4p_categoryfaq_item',
         'multilang' => true,
         'fields' => [
             'active' => ['type' => self::TYPE_BOOL, 'validate' => 'isBool'],
@@ -52,7 +52,7 @@ class M4pCategoryFaqItem extends ObjectModel
     {
         if (!$this->position) {
             $this->position = 1 + (int) Db::getInstance()->getValue(
-                'SELECT MAX(`position`) FROM `' . _DB_PREFIX_ . 'm4pcategoryfaq_item`'
+                'SELECT MAX(`position`) FROM `' . _DB_PREFIX_ . 'm4p_categoryfaq_item`'
             );
         }
 
@@ -61,7 +61,7 @@ class M4pCategoryFaqItem extends ObjectModel
 
     public function delete()
     {
-        Db::getInstance()->delete('m4pcategoryfaq_item_category', 'id_m4pcategoryfaq_item = ' . (int) $this->id);
+        Db::getInstance()->delete('m4p_categoryfaq_item_category', 'id_m4p_categoryfaq_item = ' . (int) $this->id);
 
         return parent::delete();
     }
@@ -80,10 +80,10 @@ class M4pCategoryFaqItem extends ObjectModel
     public function setCategories(array $idCategories): void
     {
         $db = Db::getInstance();
-        $db->delete('m4pcategoryfaq_item_category', 'id_m4pcategoryfaq_item = ' . (int) $this->id);
+        $db->delete('m4p_categoryfaq_item_category', 'id_m4p_categoryfaq_item = ' . (int) $this->id);
         foreach (array_unique(array_filter(array_map('intval', $idCategories))) as $idCategory) {
-            $db->insert('m4pcategoryfaq_item_category', [
-                'id_m4pcategoryfaq_item' => (int) $this->id,
+            $db->insert('m4p_categoryfaq_item_category', [
+                'id_m4p_categoryfaq_item' => (int) $this->id,
                 'id_category' => $idCategory,
             ]);
         }
@@ -102,8 +102,8 @@ class M4pCategoryFaqItem extends ObjectModel
         }
 
         $rows = Db::getInstance()->executeS(
-            'SELECT DISTINCT `id_category` FROM `' . _DB_PREFIX_ . 'm4pcategoryfaq_item_category`
-             WHERE `id_m4pcategoryfaq_item` IN (' . implode(',', $idItems) . ')'
+            'SELECT DISTINCT `id_category` FROM `' . _DB_PREFIX_ . 'm4p_categoryfaq_item_category`
+             WHERE `id_m4p_categoryfaq_item` IN (' . implode(',', $idItems) . ')'
         ) ?: [];
 
         return array_map(static fn (array $row): int => (int) $row['id_category'], $rows);
@@ -116,13 +116,13 @@ class M4pCategoryFaqItem extends ObjectModel
     {
         return Db::getInstance()->executeS(
             'SELECT il.`question`, il.`answer`
-             FROM `' . _DB_PREFIX_ . 'm4pcategoryfaq_item` i
-             INNER JOIN `' . _DB_PREFIX_ . 'm4pcategoryfaq_item_category` ic
-                ON ic.`id_m4pcategoryfaq_item` = i.`id_m4pcategoryfaq_item` AND ic.`id_category` = ' . $idCategory . '
-             INNER JOIN `' . _DB_PREFIX_ . 'm4pcategoryfaq_item_lang` il
-                ON il.`id_m4pcategoryfaq_item` = i.`id_m4pcategoryfaq_item` AND il.`id_lang` = ' . $idLang . '
+             FROM `' . _DB_PREFIX_ . 'm4p_categoryfaq_item` i
+             INNER JOIN `' . _DB_PREFIX_ . 'm4p_categoryfaq_item_category` ic
+                ON ic.`id_m4p_categoryfaq_item` = i.`id_m4p_categoryfaq_item` AND ic.`id_category` = ' . $idCategory . '
+             INNER JOIN `' . _DB_PREFIX_ . 'm4p_categoryfaq_item_lang` il
+                ON il.`id_m4p_categoryfaq_item` = i.`id_m4p_categoryfaq_item` AND il.`id_lang` = ' . $idLang . '
              WHERE i.`active` = 1 AND il.`question` <> \'\'
-             ORDER BY i.`position` ASC, i.`id_m4pcategoryfaq_item` ASC'
+             ORDER BY i.`position` ASC, i.`id_m4p_categoryfaq_item` ASC'
         ) ?: [];
     }
 }

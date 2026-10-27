@@ -1,5 +1,5 @@
 {
-    "name": "modules4presta/m4pcategoryfaq",
+    "name": "modules4presta/m4p_categoryfaq",
     "description": "Questions and answers below the product list of a category, with FAQPage structured data.",
     "type": "prestashop-module",
     "license": "MIT",
