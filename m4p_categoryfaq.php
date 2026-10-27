@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * m4pcategoryfaq
+ * m4p_categoryfaq
  *
  * @author    Modules4Presta <contact@modules4presta.io>
  * @copyright 2026 Nice Code sp. z o.o. (Modules4Presta)
@@ -16,7 +16,7 @@ if (!defined('_PS_VERSION_')) {
 
 require_once __DIR__ . '/classes/M4pCategoryFaqItem.php';
 
-class M4pcategoryfaq extends Module
+class M4p_CategoryFaq extends Module
 {
     public const HOOK = 'displayM4pCategoryFaq';
 
@@ -24,7 +24,7 @@ class M4pcategoryfaq extends Module
 
     public function __construct()
     {
-        $this->name = 'm4pcategoryfaq';
+        $this->name = 'm4p_categoryfaq';
         $this->tab = 'front_office_features';
         $this->version = '1.0.0';
         $this->author = 'Modules4Presta';
@@ -92,24 +92,6 @@ class M4pcategoryfaq extends Module
         return $this->fetch('module:' . $this->name . '/views/templates/hook/category-faq.tpl');
     }
 
-    /**
-     * Purges the LiteSpeed page cache of the given categories.
-     *
-     * @param int[] $idCategories
-     */
-    public function purgeCategoryPages(array $idCategories): void
-    {
-        $idCategories = array_unique(array_filter(array_map('intval', $idCategories)));
-        if (!$idCategories || !Module::isEnabled('litespeedcache')) {
-            return;
-        }
-
-        Hook::exec('litespeedCachePurge', [
-            'from' => $this->name,
-            'public' => array_map(static fn (int $id): string => 'C' . $id, $idCategories),
-        ]);
-    }
-
     // FAQPage markup is emitted once per question set: on the first, unfiltered page of the category.
     // Paginated and filtered URLs repeat the same questions and would duplicate it.
     private function isCanonicalListing(): bool
@@ -124,25 +106,25 @@ class M4pcategoryfaq extends Module
         $engine = _MYSQL_ENGINE_;
         $prefix = _DB_PREFIX_;
         $queries = [
-            "CREATE TABLE IF NOT EXISTS `{$prefix}m4pcategoryfaq_item` (
-                `id_m4pcategoryfaq_item` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            "CREATE TABLE IF NOT EXISTS `{$prefix}m4p_categoryfaq_item` (
+                `id_m4p_categoryfaq_item` INT UNSIGNED NOT NULL AUTO_INCREMENT,
                 `active` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
                 `position` INT UNSIGNED NOT NULL DEFAULT 0,
                 `date_add` DATETIME NOT NULL,
                 `date_upd` DATETIME NOT NULL,
-                PRIMARY KEY (`id_m4pcategoryfaq_item`)
+                PRIMARY KEY (`id_m4p_categoryfaq_item`)
             ) ENGINE={$engine} DEFAULT CHARSET=utf8mb4;",
-            "CREATE TABLE IF NOT EXISTS `{$prefix}m4pcategoryfaq_item_lang` (
-                `id_m4pcategoryfaq_item` INT UNSIGNED NOT NULL,
+            "CREATE TABLE IF NOT EXISTS `{$prefix}m4p_categoryfaq_item_lang` (
+                `id_m4p_categoryfaq_item` INT UNSIGNED NOT NULL,
                 `id_lang` INT UNSIGNED NOT NULL,
                 `question` VARCHAR(255) NOT NULL,
                 `answer` TEXT,
-                PRIMARY KEY (`id_m4pcategoryfaq_item`, `id_lang`)
+                PRIMARY KEY (`id_m4p_categoryfaq_item`, `id_lang`)
             ) ENGINE={$engine} DEFAULT CHARSET=utf8mb4;",
-            "CREATE TABLE IF NOT EXISTS `{$prefix}m4pcategoryfaq_item_category` (
-                `id_m4pcategoryfaq_item` INT UNSIGNED NOT NULL,
+            "CREATE TABLE IF NOT EXISTS `{$prefix}m4p_categoryfaq_item_category` (
+                `id_m4p_categoryfaq_item` INT UNSIGNED NOT NULL,
                 `id_category` INT UNSIGNED NOT NULL,
-                PRIMARY KEY (`id_m4pcategoryfaq_item`, `id_category`),
+                PRIMARY KEY (`id_m4p_categoryfaq_item`, `id_category`),
                 KEY `id_category` (`id_category`)
             ) ENGINE={$engine} DEFAULT CHARSET=utf8mb4;",
         ];
@@ -158,7 +140,7 @@ class M4pcategoryfaq extends Module
 
     private function uninstallTables(): bool
     {
-        foreach (['m4pcategoryfaq_item_category', 'm4pcategoryfaq_item_lang', 'm4pcategoryfaq_item'] as $table) {
+        foreach (['m4p_categoryfaq_item_category', 'm4p_categoryfaq_item_lang', 'm4p_categoryfaq_item'] as $table) {
             Db::getInstance()->execute('DROP TABLE IF EXISTS `' . _DB_PREFIX_ . $table . '`');
         }
 
@@ -174,7 +156,7 @@ class M4pcategoryfaq extends Module
         $hook = new Hook();
         $hook->name = self::HOOK;
         $hook->title = 'Category FAQ';
-        $hook->description = 'Questions and answers below the category product list (m4pcategoryfaq).';
+        $hook->description = 'Questions and answers below the category product list (m4p_categoryfaq).';
 
         return $hook->add();
     }
