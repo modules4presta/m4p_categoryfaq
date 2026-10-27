@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="module" source-language="en-US" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="f75c2475881842447084f18183e296e0">
+        <source>Category FAQ</source>
+        <target>FAQ kategorii</target>
+      </trans-unit>
+      <trans-unit id="e53e0d5f105d12c0c2722c8f93632b59">
+        <source>Questions and answers below the product list of a category, with FAQPage structured data.</source>
+        <target>Pytania i odpowiedzi pod listą produktów kategorii, z danymi strukturalnymi FAQPage.</target>
+      </trans-unit>
+      <trans-unit id="a97ea56b0e00b2379736ae60869ff66a">
+        <source>Question</source>
+        <target>Pytanie</target>
+      </trans-unit>
+      <trans-unit id="e16f5b25d7d55d7d45aba4614d6099a2">
+        <source>Phrase it the way customers ask, e.g. "Which pyrometer for measuring metal?".</source>
+        <target>Sformułuj je tak, jak pytają klienci, np. „Jaki pirometr do pomiaru metalu?”.</target>
+      </trans-unit>
+      <trans-unit id="3751695c17afed4055a7a5ad5d46f6f5">
+        <source>Answer</source>
+        <target>Odpowiedź</target>
+      </trans-unit>
+      <trans-unit id="665d21b5952c6b47660965829eaa1237">
+        <source>Answer in the first sentence, then add details. Search engines and AI assistants quote short, self-contained answers.</source>
+        <target>Odpowiedz w pierwszym zdaniu, potem dodaj szczegóły. Wyszukiwarki i asystenci AI cytują krótkie, samodzielne odpowiedzi.</target>
+      </trans-unit>
+      <trans-unit id="40f1765e68d0cd8540f7d0f9b2549028">
+        <source>The question shows below the product list of each selected category.</source>
+        <target>Pytanie pokazuje się pod listą produktów każdej wybranej kategorii.</target>
+      </trans-unit>
+      <trans-unit id="818bc683a3adca4485b12de693d7bc04">
+        <source>Lower numbers come first. Leave empty to add the question at the end.</source>
+        <target>Niższe liczby są pierwsze. Puste pole dodaje pytanie na końcu.</target>
+      </trans-unit>
+      <trans-unit id="72979def4d58a24e928b962a7e0a9a10">
+        <source>Select at least one category.</source>
+        <target>Wybierz co najmniej jedną kategorię.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

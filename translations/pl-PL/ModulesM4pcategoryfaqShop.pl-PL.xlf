@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="module" source-language="en-US" target-language="pl-PL" datatype="plaintext">
+    <body>
+      <trans-unit id="2b0317e07394083aa68cf6ebcfb4f029">
+        <source>%category% – frequently asked questions</source>
+        <target>%category% – często zadawane pytania</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>m4pcategoryfaq</name>
+    <displayName><![CDATA[Category FAQ]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[Questions and answers below the product list of a category, with FAQPage structured data.]]></description>
+    <author><![CDATA[Modules4Presta]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+    <limited_countries></limited_countries>
+</module>
